@@ -91,7 +91,7 @@ trustedCACert: ""
 trustedCACertSecretRef: ""
 
 # provider -- Name of the Kubernetes service provider
-# one of: "eks", "gks", "aks", "kops".
+# one of: "eks", "gke", "aks", "kops".
 provider: ""
 
 # allowReadIngress -- Allow to read ingress resources. Needed for k8s security and compliance.

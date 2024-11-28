@@ -42,7 +42,7 @@ CAST AI agent deployment chart.
 | podLabels | object | `{}` | Labels to be added to agent pods. |
 | priorityClass.enabled | bool | `true` |  |
 | priorityClass.name | string | `"system-cluster-critical"` |  |
-| provider | string | `""` | Name of the Kubernetes service provider one of: "eks", "gks", "aks", "kops". |
+| provider | string | `""` | Name of the Kubernetes service provider one of: "eks", "gke", "aks", "kops". |
 | rbac.configmapsReadAccessNamespaces | list | `["kube-system"]` | Namespaces to be granted access to the castai-agent for configmaps read access. |
 | rbac.enabled | bool | `true` | Specifies whether a Clusterrole should be created. |
 | replicaCount | int | `2` |  |
