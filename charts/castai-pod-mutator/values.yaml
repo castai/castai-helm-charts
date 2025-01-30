@@ -99,5 +99,10 @@ castai:
   apiKey: ""
   # apiUrl -- URL of the CAST AI API.
   apiUrl: "https://api.cast.ai"
-  # clusterID -- ID of the cluster the pod-mutator is deployed in.
+  # clusterID and clusterIdSecretKeyRef are mutually exclusive
   clusterID: ""
+  # clusterIdSecretKeyRef -- Name and Key of secret with ClusterID
+  # The referenced secret must provide the ClusterID in .data[<<.Values.castai.clusterIdSecretKeyRef.key>>]
+  clusterIdSecretKeyRef:
+    name: ""
+    key: "CLUSTER_ID"
