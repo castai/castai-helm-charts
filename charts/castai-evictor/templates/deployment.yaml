@@ -76,6 +76,20 @@ spec:
               value: "/config/config.yaml"
             - name: CYCLE_INTERVAL
               value: {{ .Values.cycleInterval | quote }}
+            {{- if .Values.clusterIdSecretKeyRef.name }}          
+            {{- if ne .Values.clusterIdConfigMapKeyRef.name "" }}
+            {{- fail "clusterIdConfigMapKeyRef and clusterIdSecretKeyRef are mutually exclusive" }}
+            {{- end }}
+            - name: CLUSTER_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ required "clusterIdConfigMapKeyRef or clusterIdSecretKeyRef must be provided" .Values.clusterIdSecretKeyRef.name }}
+                  key: {{ .Values.clusterIdSecretKeyRef.key }}
+            {{- else }}
+            {{- if not .Values.clusterIdConfigMapKeyRef.name }}
+            {{- fail "either clusterIdConfigMapKeyRef or clusterIdSecretKeyRef must be provided" }}
+            {{- end }}
+            {{- end }}
             {{- if .Values.clusterIdConfigMapKeyRef.name }}
             - name: CLUSTER_ID
               valueFrom:

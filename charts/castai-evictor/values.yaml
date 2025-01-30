@@ -173,3 +173,8 @@ clusterIdConfigMapKeyRef:
   name: ""
   # clusterIdConfigMapKeyRef.key -- key of the cluster id value in the config map
   key: "CLUSTER_ID"
+
+# The referenced Secret must provide the ClusterID in .data[<<.Values.clusterIdSecretKeyRef.key>>]
+clusterIdSecretKeyRef:
+    name: ""
+    key: "CLUSTER_ID"
