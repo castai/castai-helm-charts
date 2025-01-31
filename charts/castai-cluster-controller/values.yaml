@@ -154,11 +154,11 @@ priorityClass:
 
 # k8sApiClient -- Settings for configuring k8s client used in castai-cluster-controller.
 k8sApiClient:
-  # rateLimit -- Client uses token based rate limiting. By default, client has 150 api request burst limit set.
-  # Buffer is refilled with 25 tokens every second. During sustained load client will be capped at 25 requests / sec.
+  # rateLimit -- Client uses token based rate limiting. By default, client has 200 api request burst limit set.
+  # Buffer is refilled with 100 tokens every second. During sustained load client will be capped at 100 requests / sec.
   rateLimit:
-    burst: 150
-    qps: 25
+    burst: 200
+    qps: 100
 
 # workloadManagement -- Settings for managing deployments and other pod controllers.
 workloadManagement:
