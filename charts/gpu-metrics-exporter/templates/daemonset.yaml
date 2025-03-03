@@ -86,7 +86,11 @@ spec:
             - name: "API_KEY"
               valueFrom:
                 secretKeyRef:
+                  {{- if .Values.castai.apiKeySecretRef }}
+                  name: {{ .Values.castai.apiKeySecretRef }}
+                  {{- else }}
                   name: {{ include "gpu-metrics-exporter.fullname" . }}
+                  {{- end }}
                   key: API_KEY
           {{- if .Values.castai.clusterIdSecretKeyRef.name }}
             {{- if ne .Values.castai.clusterId "" }}
