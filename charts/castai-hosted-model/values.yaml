@@ -1,4 +1,23 @@
 ollama:
+  # -- Specifies if Ollama model should be deployed
   enabled: true
 vllm:
+  # -- Specifies if vLLM model should be deployed
   enabled: false
+placementJob:
+  # -- Specifies if a node placement job should be deployed
+  enabled: false
+
+  # -- Total GPU memory MiB (GPU count * GPU memory MiB) of the node that should be provisioned for this job
+  requiredGPUTotalMemoryMiB:
+
+  image:
+    # -- The image to use for the job
+    repository: busybox
+    # -- The image tag
+    tag: "1.37.0"
+    # -- Image pull policy
+    pullPolicy: IfNotPresent
+
+  # -- Resources for the job
+  resources: {}

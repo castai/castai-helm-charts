@@ -2,7 +2,7 @@ apiVersion: v2
 name: castai-hosted-model
 description: CAST AI hosted model deployment chart.
 type: application
-version: 0.0.7
+version: 0.0.8
 appVersion: "v0.0.1"
 dependencies:
   - name: ollama

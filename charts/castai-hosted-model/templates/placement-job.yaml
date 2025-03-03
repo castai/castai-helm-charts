@@ -1,0 +1,55 @@
+{{- if .Values.placementJob.enabled }}
+{{- $nodeTemplateName := required "placementJob.nodeTemplateName is required" .Values.placementJob.nodeTemplateName }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Release.Name }}-placement-job
+  labels:
+    app.kubernetes.io/name: {{ .Chart.Name }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/component: placement-job
+spec:
+  backoffLimit: 0
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ .Chart.Name }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        app.kubernetes.io/component: placement-job
+    spec:
+      restartPolicy: Never
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: nvidia.com/gpu.total-memory
+                    operator: Gt
+                    values:
+                      - "{{ required "placementJob.requiredGPUTotalMemoryMiB is required" .Values.placementJob.requiredGPUTotalMemoryMiB }}"
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              preference:
+                matchExpressions:
+                  - key: scheduling.cast.ai/spot
+                    operator: Exists
+      containers:
+        - name: placement-job
+          image: "{{ .Values.placementJob.image.repository }}:{{ .Values.placementJob.image.tag }}"
+          imagePullPolicy: {{ .Values.placementJob.image.pullPolicy | quote }}
+          command: ["/bin/sh", "-c", "echo Node placement job finished."]
+          resources:
+            {{- toYaml .Values.routerResources | nindent 12 }}
+      nodeSelector:
+        scheduling.cast.ai/node-template: "{{ $nodeTemplateName }}"
+      tolerations:
+        - key: scheduling.cast.ai/node-template
+          value: "{{ $nodeTemplateName }}"
+          operator: Equal
+          effect: NoSchedule
+        - key: scheduling.cast.ai/spot
+          operator: Exists
+        - key: nvidia.com/gpu
+          effect: NoSchedule
+          operator: Exists
+{{- end }}

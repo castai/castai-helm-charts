@@ -13,5 +13,11 @@ CAST AI hosted model deployment chart.
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| ollama.enabled | bool | `true` |  |
-| vllm.enabled | bool | `false` |  |
+| ollama.enabled | bool | `true` | Specifies if Ollama model should be deployed |
+| placementJob.enabled | bool | `false` | Specifies if a node placement job should be deployed |
+| placementJob.image.pullPolicy | string | `"IfNotPresent"` | Image pull policy |
+| placementJob.image.repository | string | `"busybox"` | The image to use for the job |
+| placementJob.image.tag | string | `"1.37.0"` | The image tag |
+| placementJob.requiredGPUTotalMemoryMiB | string | `nil` | Total GPU memory MiB (GPU count * GPU memory MiB) of the node that should be provisioned for this job |
+| placementJob.resources | object | `{}` | Resources for the job |
+| vllm.enabled | bool | `false` | Specifies if vLLM model should be deployed |
