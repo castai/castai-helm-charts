@@ -1,5 +1,4 @@
 castai:
-  apiURL: "https://api.cast.ai"
   grpcURL: "grpc.cast.ai:443"
   apiKey: "gibberish"
   clusterID: "a24cd53c-0d56-4422-88e6-f82f78ef8f20"
