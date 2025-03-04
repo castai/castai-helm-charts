@@ -53,10 +53,14 @@ spec:
             httpGet:
               port: 9091
               path: /healthz
+            initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds | default 5 }}
+            periodSeconds: {{ .Values.livenessProbe.periodSeconds | default 10 }}
           readinessProbe:
             httpGet:
               port: 9091
               path: /readyz
+            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds | default 5 }}
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds | default 10 }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:

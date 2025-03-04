@@ -14,6 +14,14 @@ image:
   # -- Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
+livenessProbe:
+  periodSeconds: 10
+  initialDelaySeconds: 5
+
+readinessProbe:
+  periodSeconds: 10
+  initialDelaySeconds: 5
+
 # -- Specifies whether the Pod Pinner should be managed by CAST AI automatically. Only the exact value "false" disables automatic management of the chart.
 # If set to "false", then the installation, upgrade or any changes have to be managed manually.
 managedByCASTAI: true
