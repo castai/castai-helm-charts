@@ -9,6 +9,7 @@ serviceAccount:
 
 castai:
   apiKey: ""
+  apiKeySecretRef: ""
   clusterId: ""
   clusterIdSecretKeyRef:
     name: ""
